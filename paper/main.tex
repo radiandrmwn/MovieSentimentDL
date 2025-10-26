@@ -1,0 +1,83 @@
+
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+
+\usepackage{cite}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{xcolor}
+
+\begin{document}
+
+\title{Long-Review Sentiment on Amazon Movies \& TV: RoBERTa vs. Longformer with Ordinal-Aware Training}
+
+\author{
+\IEEEauthorblockN{Radian Try Darmawan, Team Members}
+\IEEEauthorblockA{Department of Computer Science\\
+University / Institute \\
+Email: \{leader,email\}@example.edu}
+}
+
+\maketitle
+
+\begin{abstract}
+We study large-scale sentiment analysis of long-form product reviews in the Movies \& TV domain using a corpus exceeding one million examples. We benchmark fastText, RoBERTa-base, and Longformer-base, and introduce two practical enhancements: (i) an ordinal-aware training head that leverages 1--5 star supervision more effectively and (ii) a length-aware routing strategy that applies RoBERTa to short inputs and Longformer to long inputs. On time-ordered splits to mitigate leakage across products, our best system improves macro-F1 over strong RoBERTa baselines while retaining competitive inference cost via optional distillation. We provide ablations on truncation length, ordinal supervision, and routing thresholds, and analyze typical failure modes (e.g., sarcasm, mixed-aspect reviews).
+\end{abstract}
+
+\begin{IEEEkeywords}
+Sentiment analysis, Transformers, Long documents, Ordinal classification, Amazon Reviews
+\end{IEEEkeywords}
+
+\section{Introduction}
+\label{sec:intro}
+Briefly motivate why sentiment over long consumer reviews matters for media analytics and recommendation. State contributions:
+\begin{itemize}
+\item A million-scale Movies \& TV sentiment benchmark with time-aware splits.
+\item RoBERTa vs. Longformer comparison for long reviews.
+\item Ordinal-aware training and length-aware routing strategies.
+\end{itemize}
+
+\section{Related Work}
+\label{sec:related}
+Summarize classical baselines (fastText; CNN/LSTM), hierarchical attention (HAN), and transformer fine-tuning (BERT, RoBERTa) including long-context architectures (Longformer). Discuss strengths/limitations regarding long sequences and noisy star labels.
+
+\section{Dataset}
+\label{sec:dataset}
+Describe Amazon Reviews 2018 Movies \& TV slice: fields, preprocessing, deduplication, label mapping (1--2 negative, 4--5 positive; optional 3 neutral), and time-based splits. Include length distribution and class balance.
+
+\section{Methods}
+\label{sec:methods}
+\subsection{Baselines}
+fastText, RoBERTa-base (512 tokens), Longformer-base (1024--1536 tokens).
+\subsection{Ordinal-Aware Head}
+Describe ordinal/ranking formulation on 1--5 stars and collapse to polarity at evaluation.
+\subsection{Length-Aware Routing}
+Routing rule by token length; ensemble/logit mixing.
+\subsection{Training Details}
+Tokenization, learning rates, batch sizes, epochs; early stopping and model selection.
+
+\section{Experiments}
+\label{sec:experiments}
+\subsection{Setup}
+Metrics (macro-F1, AUROC), hardware, and data splits.
+\subsection{Results}
+Main table comparing baselines and proposed methods.
+\subsection{Ablations}
+Effect of truncation length, ordinal head, and routing thresholds.
+\subsection{Error Analysis}
+Qualitative examples (sarcasm, contrastive summaries vs. bodies).
+
+\section{Discussion}
+\label{sec:discussion}
+When long-context helps; trade-offs in latency and memory; notes on domain-adaptive pre-finetuning and distillation.
+
+\section{Conclusion}
+\label{sec:conclusion}
+Summary and future work: multilingual transfer, semi-supervised self-training.
+
+\bibliographystyle{IEEEtran}
+\bibliography{refs}
+
+\end{document}
