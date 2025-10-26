@@ -1,0 +1,29 @@
+# Large data files
+data/raw/*.json
+data/processed/*.parquet
+data/deep_learning_data/*.parquet
+
+# Model files (large binary files)
+*.keras
+*.model
+*.npy
+results/**/*.pkl
+results/**/*.keras
+results/**/*.model
+results/**/*.npy
+
+# Keep PNG visualizations and analysis notebooks
+!results/**/*.png
+!*.ipynb
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+
+# Jupyter
+.ipynb_checkpoints

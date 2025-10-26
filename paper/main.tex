@@ -11,7 +11,7 @@
 
 \begin{document}
 
-\title{Long-Review Sentiment on Amazon Movies \& TV: RoBERTa vs. Longformer with Ordinal-Aware Training}
+\title{Movie Review Sentiment Analysis: Comparing LSTM-based Architectures with Word2Vec Embeddings}
 
 \author{
 \IEEEauthorblockN{Radian Try Darmawan, Team Members}
@@ -23,59 +23,61 @@ Email: \{leader,email\}@example.edu}
 \maketitle
 
 \begin{abstract}
-We study large-scale sentiment analysis of long-form product reviews in the Movies \& TV domain using a corpus exceeding one million examples. We benchmark fastText, RoBERTa-base, and Longformer-base, and introduce two practical enhancements: (i) an ordinal-aware training head that leverages 1--5 star supervision more effectively and (ii) a length-aware routing strategy that applies RoBERTa to short inputs and Longformer to long inputs. On time-ordered splits to mitigate leakage across products, our best system improves macro-F1 over strong RoBERTa baselines while retaining competitive inference cost via optional distillation. We provide ablations on truncation length, ordinal supervision, and routing thresholds, and analyze typical failure modes (e.g., sarcasm, mixed-aspect reviews).
+We present a comparative study of LSTM-based architectures for sentiment analysis on movie reviews using 200,000 samples from the Amazon Movies \& TV dataset. We implement and evaluate four deep learning models: vanilla LSTM, Bidirectional LSTM (Bi-LSTM), LSTM with Attention mechanism, and GRU. All models utilize Word2Vec embeddings for text representation. Our experiments demonstrate the effectiveness of different architectural choices, with attention mechanisms and bidirectional processing showing improvements over the baseline LSTM. We provide detailed performance comparisons, training dynamics analysis, and discuss the trade-offs between model complexity and classification accuracy.
 \end{abstract}
 
 \begin{IEEEkeywords}
-Sentiment analysis, Transformers, Long documents, Ordinal classification, Amazon Reviews
+Sentiment analysis, LSTM, Bidirectional LSTM, Attention mechanism, GRU, Word2Vec, Amazon Reviews
 \end{IEEEkeywords}
 
 \section{Introduction}
 \label{sec:intro}
-Briefly motivate why sentiment over long consumer reviews matters for media analytics and recommendation. State contributions:
+Sentiment analysis of movie reviews is crucial for understanding consumer opinions and improving recommendation systems. Deep learning approaches, particularly recurrent neural networks, have shown strong performance on sequence modeling tasks. State contributions:
 \begin{itemize}
-\item A million-scale Movies \& TV sentiment benchmark with time-aware splits.
-\item RoBERTa vs. Longformer comparison for long reviews.
-\item Ordinal-aware training and length-aware routing strategies.
+\item Comprehensive comparison of four LSTM-based architectures on 200K movie reviews.
+\item Implementation and evaluation of vanilla LSTM, Bi-LSTM, LSTM+Attention, and GRU models.
+\item Analysis of Word2Vec embeddings effectiveness for sentiment classification.
+\item Performance benchmarking and training dynamics visualization across all models.
 \end{itemize}
 
 \section{Related Work}
 \label{sec:related}
-Summarize classical baselines (fastText; CNN/LSTM), hierarchical attention (HAN), and transformer fine-tuning (BERT, RoBERTa) including long-context architectures (Longformer). Discuss strengths/limitations regarding long sequences and noisy star labels.
+Recurrent neural networks have been widely used for sentiment analysis. LSTM architectures address the vanishing gradient problem in traditional RNNs. Bidirectional LSTMs capture both past and future context. Attention mechanisms allow models to focus on relevant parts of the input sequence. Word2Vec embeddings provide dense representations that capture semantic relationships. This work builds on these foundations by systematically comparing these architectural variants on movie review sentiment classification.
 
 \section{Dataset}
 \label{sec:dataset}
-Describe Amazon Reviews 2018 Movies \& TV slice: fields, preprocessing, deduplication, label mapping (1--2 negative, 4--5 positive; optional 3 neutral), and time-based splits. Include length distribution and class balance.
+We use 200,000 samples from the Amazon Movies \& TV Reviews dataset. The dataset includes review text and ratings (1-5 stars). Preprocessing steps include text cleaning, tokenization, and label mapping (1-2 stars mapped to negative, 4-5 stars to positive). We use an 80-20 train-test split. Reviews are padded/truncated to a maximum sequence length of 200 tokens for consistent input dimensions across all models.
 
 \section{Methods}
 \label{sec:methods}
-\subsection{Baselines}
-fastText, RoBERTa-base (512 tokens), Longformer-base (1024--1536 tokens).
-\subsection{Ordinal-Aware Head}
-Describe ordinal/ranking formulation on 1--5 stars and collapse to polarity at evaluation.
-\subsection{Length-Aware Routing}
-Routing rule by token length; ensemble/logit mixing.
+\subsection{Word2Vec Embeddings}
+We train Word2Vec embeddings (dimension=100, window=5, min\_count=2) on the review corpus to capture semantic word relationships.
+\subsection{Model Architectures}
+\textbf{LSTM Baseline:} Single-layer LSTM (128 units) with dropout (0.5).\\
+\textbf{Bi-LSTM:} Bidirectional LSTM processing sequences in both directions.\\
+\textbf{LSTM+Attention:} LSTM with attention mechanism to weight important tokens.\\
+\textbf{GRU:} Gated Recurrent Unit as an alternative to LSTM with simpler architecture.
 \subsection{Training Details}
-Tokenization, learning rates, batch sizes, epochs; early stopping and model selection.
+All models use Adam optimizer (lr=0.001), batch size of 32, trained for 10 epochs with early stopping. Binary cross-entropy loss for sentiment classification (positive/negative).
 
 \section{Experiments}
 \label{sec:experiments}
 \subsection{Setup}
-Metrics (macro-F1, AUROC), hardware, and data splits.
+Evaluation metrics include accuracy, precision, recall, and F1-score. Models trained on GPU (NVIDIA CUDA-enabled) with 80-20 train-test split.
 \subsection{Results}
-Main table comparing baselines and proposed methods.
-\subsection{Ablations}
-Effect of truncation length, ordinal head, and routing thresholds.
+Performance comparison across four architectures showing test accuracy, loss curves, and training dynamics. Visualization of model learning patterns included in figures.
+\subsection{Analysis}
+Comparison of model convergence rates, overfitting behavior, and computational efficiency. Discussion of attention weights for interpretability in LSTM+Attention model.
 \subsection{Error Analysis}
-Qualitative examples (sarcasm, contrastive summaries vs. bodies).
+Analysis of misclassified examples including handling of sarcasm, mixed sentiment, and context-dependent reviews.
 
 \section{Discussion}
 \label{sec:discussion}
-When long-context helps; trade-offs in latency and memory; notes on domain-adaptive pre-finetuning and distillation.
+Bidirectional processing and attention mechanisms provide performance gains over vanilla LSTM. Trade-offs exist between model complexity and inference speed. GRU offers competitive performance with fewer parameters. Word2Vec embeddings effectively capture sentiment-relevant semantic information.
 
 \section{Conclusion}
 \label{sec:conclusion}
-Summary and future work: multilingual transfer, semi-supervised self-training.
+We systematically compared four LSTM-based architectures for movie review sentiment analysis on 200K samples. Results demonstrate that architectural enhancements (bidirectionality, attention) improve classification performance. Future work includes exploring transformer-based models, ensemble methods, and aspect-based sentiment analysis.
 
 \bibliographystyle{IEEEtran}
 \bibliography{refs}
