@@ -48,6 +48,49 @@ Input (Text) → Word2Vec Embeddings (100d) → LSTM (128 units) → Dense (1, s
 ```
 - **Accuracy**: 94.16% | **Precision**: 94.05% | **Recall**: 94.33% | **F1**: 94.19%
 
+#### How It Works (Step-by-Step):
+
+1. **Input (Text)**
+   - Your raw movie review text, e.g., "This movie was amazing!"
+   - Just plain text strings
+
+2. **Word2Vec Embeddings (100d)**
+   - Converts each word into a 100-dimensional numerical vector
+   - Example: "amazing" might become `[0.23, -0.45, 0.67, ..., 0.12]` (100 numbers)
+   - **Why?** Neural networks can't understand words directly, only numbers
+   - **100d** = 100 dimensions (each word is represented by 100 numbers)
+   - Word2Vec learns these representations so similar words have similar vectors
+
+3. **LSTM (128 units)**
+   - **LSTM** = Long Short-Term Memory (a type of recurrent neural network)
+   - **128 units** = The LSTM layer has 128 memory cells/neurons
+   - **What it does:** Reads the sequence of word vectors and "remembers" important context
+   - Example: In "The movie was not bad", LSTM remembers "not" to understand the sentiment is actually positive
+
+4. **Dense (1, sigmoid)**
+   - **Dense** = Fully connected layer (every neuron connects to every input)
+   - **(1, ...)** = Outputs just 1 number
+   - **sigmoid** = Activation function that squashes output between 0 and 1
+   - Example output: `0.92` = 92% confidence the review is positive
+
+5. **Output**
+   - Final prediction: A probability between 0 and 1
+   - If > 0.5 → Positive review
+   - If ≤ 0.5 → Negative review
+
+**Example Flow:**
+```
+"This movie was great!"
+    ↓
+[word1_vector, word2_vector, word3_vector, word4_vector] (each 100d)
+    ↓
+LSTM processes sequence → produces 128-dimensional summary
+    ↓
+Dense layer → 0.95 (95% confidence)
+    ↓
+Prediction: POSITIVE ✓
+```
+
 ### Training Configuration
 - **Dataset**: 200K Amazon reviews (160K train, 40K test - 80/20 split)
 - **Model Training Epochs**: 5
