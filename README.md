@@ -10,47 +10,53 @@
 
 Trained and evaluated 4 LSTM-based models on 200K Amazon product reviews:
 
-| Rank | Model | Test Accuracy | Improvement vs Baseline Paper |
-|------|-------|---------------|-------------------------------|
-| 🥇 | **LSTM (Baseline)** | **93.23%** | **+4.77%** |
-| 🥈 | LSTM + Attention | 93.08% | +4.62% |
-| 🥉 | GRU | 93.02% | +4.56% |
-| 4️⃣ | Bi-LSTM | 92.98% | +4.52% |
+| Rank | Model | Accuracy | Precision | Recall | F1 Score |
+|------|-------|----------|-----------|--------|----------|
+| 🥇 | **LSTM Baseline** | **94.16%** | **94.05%** | **94.33%** | **94.19%** |
+| 🥈 | LSTM + Attention | 93.81% | 95.02% | 92.51% | 93.75% |
+| 🥉 | GRU | 93.80% | 93.60% | 94.08% | 93.84% |
+| 4️⃣ | Bi-LSTM | 93.75% | 93.83% | 93.70% | 93.77% |
 
-> **Reference:** Bodapati et al. (2019) achieved 88.46% on 50K IMDB reviews
+> **All models achieved >93.7% accuracy with balanced precision and recall**
+>
+> **Reference:** Bodapati et al. (2019) achieved 88.46% on 50K IMDB reviews - our baseline improves by **+5.7%**
 
 ## 🎯 Project Highlights
 
-- ✅ **93.23% test accuracy** - Baseline LSTM outperforms all variants
+- ✅ **94.16% test accuracy** - Baseline LSTM achieves best overall performance
+- ✅ **Complete metrics** - Accuracy, Precision, Recall, and F1 Score for all models
 - ✅ **4 model architectures** - LSTM, Bi-LSTM, LSTM+Attention, GRU
 - ✅ **200K dataset** - Balanced positive/negative Amazon reviews
-- ✅ **No overfitting** - Training and validation accuracies track closely
+- ✅ **Balanced performance** - High precision (93-95%) and recall (92-94%) across all models
 - ✅ **GPU-accelerated** - Trained on NVIDIA RTX 4060 (WSL2 + CUDA)
-- ✅ **Reproducible** - All code, models, and results included
+- ✅ **Reproducible** - All code, models, and comprehensive visualizations included
 
 ## 📈 Key Findings
 
-1. **Simpler is Better**: LSTM baseline (93.23%) outperformed more complex architectures
-2. **Consistent Performance**: All models achieved >92.9% accuracy within 0.25% range
-3. **No Overfitting**: Training/validation accuracies remained close throughout training
-4. **Scalability**: Larger dataset (1.2M) shows further improvement to 93.98%
-5. **Efficiency**: Each model trained in ~1 hour on 200K reviews
+1. **LSTM Baseline Wins**: Simple LSTM (94.16%) outperformed more complex architectures
+2. **Attention Trades Recall for Precision**: LSTM+Attention achieved highest precision (95.02%) but lower recall (92.51%)
+3. **Consistent Performance**: All models achieved >93.7% accuracy within 0.41% range
+4. **Balanced Metrics**: F1 scores (93.75-94.19%) confirm balanced precision-recall trade-offs
+5. **No Overfitting**: Training/validation accuracies remained close throughout training
+6. **Efficiency**: Each model trained in ~1 hour on 200K reviews
 
 ## 🏗️ Architecture Details
 
-### LSTM Baseline (Best Model - 93.23%)
+### LSTM Baseline (Best Model - 94.16% Accuracy)
 ```
-Input (Text) → Word2Vec Embeddings (300d) → LSTM (128 units) → Dense (1, sigmoid) → Output
+Input (Text) → Word2Vec Embeddings (100d) → LSTM (128 units) → Dense (1, sigmoid) → Output
 ```
+- **Accuracy**: 94.16% | **Precision**: 94.05% | **Recall**: 94.33% | **F1**: 94.19%
 
 ### Training Configuration
-- **Dataset**: 200K Amazon reviews (160K train, 20K val, 20K test)
-- **Epochs**: 5
-- **Batch size**: 128
-- **Optimizer**: Adam
+- **Dataset**: 200K Amazon reviews (160K train, 40K test - 80/20 split)
+- **Model Training Epochs**: 5
+- **Batch size**: 32
+- **Optimizer**: Adam (lr=0.001)
 - **Loss**: Binary cross-entropy
-- **Embeddings**: Word2Vec (300 dimensions)
+- **Embeddings**: Word2Vec (100 dimensions, trained for 10 epochs)
 - **Sequence length**: 200 tokens
+- **Dropout**: 0.5
 
 ## 📁 Project Structure
 
@@ -132,13 +138,44 @@ python visualize_results.py
 
 ## 📊 Visualizations
 
+### Model Performance Comparison with Detailed Metrics
+
+![Model Comparison with Metrics](results/deep_learning/model_comparison_with_metrics.png)
+
+**Comprehensive evaluation showing:**
+- **All Metrics Comparison** - Accuracy, Precision, Recall, and F1 Score across all models
+- **Confusion Matrices** - Detailed classification results for each model
+- **Performance Metrics** - Complete evaluation metrics displayed for each architecture
+
+### Individual Model Training Progress
+
+**LSTM Baseline Training**
+
+![LSTM Training](results/deep_learning/LSTM_Baseline_training.png)
+
+**Bi-LSTM Training**
+
+![Bi-LSTM Training](results/deep_learning/Bi-LSTM_training.png)
+
+**LSTM + Attention Training**
+
+![LSTM Attention Training](results/deep_learning/LSTM_plus_Attention_training.png)
+
+**GRU Training**
+
+![GRU Training](results/deep_learning/GRU_training.png)
+
+### Overall Model Comparison
+
 ![Model Comparison](results/deep_learning/model_comparison.png)
 
-The visualization includes:
-- **Training Accuracy by Epoch** - Shows learning progression
-- **Validation Accuracy by Epoch** - Demonstrates generalization
-- **Training & Validation Loss** - Confirms convergence
-- **Final Test Accuracy** - Bar chart comparison
+The visualizations include:
+- **Training Accuracy by Epoch** - Shows learning progression over time
+- **Validation Accuracy by Epoch** - Demonstrates model generalization
+- **Training & Validation Loss** - Confirms proper convergence
+- **Final Test Accuracy** - Side-by-side performance comparison
+- **Confusion Matrices** - True vs predicted classifications
+- **Complete Metrics** - Accuracy, Precision, Recall, F1 Score for each model
 
 ## 🔬 Training Progression
 
