@@ -19,7 +19,7 @@ Trained and evaluated 4 LSTM-based models on 200K Amazon product reviews:
 
 > **All models achieved >93.7% accuracy with balanced precision and recall**
 >
-> **Reference:** Bodapati et al. (2019) achieved 88.46% on 50K IMDB reviews - our baseline improves by **+5.7%**
+> **Reference:** [Bodapati](https://www.researchgate.net/profile/Nagur-Shareef-Shaik/publication/334518326_Sentiment_Analysis_from_Movie_Reviews_Using_LSTMs/links/6679b0b31846ca33b84f8065/Sentiment-Analysis-from-Movie-Reviews-Using-LSTMs.pdf) et al. (2019) achieved 88.46% on 50K IMDB reviews - our baseline improves by **+5.7%**
 
 ## 🎯 Project Highlights
 
