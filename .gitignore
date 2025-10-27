@@ -1,7 +1,9 @@
 # Large data files
 data/raw/*.json
 data/processed/*.parquet
-data/deep_learning_data/*.parquet
+
+# Allow the 200K dataset (62MB - under GitHub limit)
+!data/deep_learning_data/movies_reviews_200k.parquet
 
 # Model files (large binary files)
 *.keras
