@@ -4,7 +4,6 @@
 
 [![Python](https://img.shields.io/badge/Python-3.12-blue.svg)](https://www.python.org/)
 [![TensorFlow](https://img.shields.io/badge/TensorFlow-2.20.0-orange.svg)](https://www.tensorflow.org/)
-[![Accuracy](https://img.shields.io/badge/Accuracy-93.23%25-success.svg)](results/deep_learning/)
 
 ## 📊 Results at a Glance
 
