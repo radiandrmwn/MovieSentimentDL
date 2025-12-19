@@ -1,0 +1,5 @@
+Model,Best_Val_Accuracy,Best_Val_Epoch,Final_Train_Accuracy,Final_Val_Accuracy,Test_Accuracy,Test_Precision,Test_Recall,Test_F1_Score
+LSTM,0.8960,9,0.9170,0.8956,0.8943,0.8963,0.8918,0.8940
+Bi-LSTM,0.8956,11,0.9019,0.8916,0.8948,0.8937,0.8962,0.8950
+LSTM+Attention,0.8980,11,0.8988,0.8976,0.8920,0.8773,0.9114,0.8941
+GRU,0.8964,15,0.9008,0.8964,0.8986,0.8854,0.9156,0.9003

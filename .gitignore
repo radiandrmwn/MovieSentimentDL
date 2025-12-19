@@ -1,31 +1,187 @@
-# Large data files
+# ============================================
+# LARGE DATA FILES
+# ============================================
+
+# Raw data files
 data/raw/*.json
+data/raw/*.json.gz
 data/processed/*.parquet
+
+# IMDb dataset (50K+ text files)
+data/imdb_raw/
+data/imdb_raw/**/*
 
 # Allow the 200K dataset (62MB - under GitHub limit)
 !data/deep_learning_data/movies_reviews_200k.parquet
+!data/deep_learning_data/movies_reviews_200k.csv
 
-# Model files (large binary files)
+# ============================================
+# MODEL FILES & TRAINING ARTIFACTS
+# ============================================
+
+# Large model binary files
 *.keras
+*.h5
 *.model
 *.npy
-results/**/*.pkl
+*.npz
+*.pkl
+*.pickle
+
+# Model checkpoints and weights
 results/**/*.keras
+results/**/*.h5
 results/**/*.model
 results/**/*.npy
+results/**/*.pkl
+checkpoints/
+*.ckpt
 
-# Keep PNG visualizations and analysis notebooks
+# Word2Vec models
+*.bin
+*.vec
+*.txt.model
+fasttext_models/
+word2vec_models/
+
+# ============================================
+# KEEP IMPORTANT FILES
+# ============================================
+
+# Keep visualizations and reports
 !results/**/*.png
-!*.ipynb
+!results/**/*.jpg
+!results/**/*.svg
+!results/**/*.pdf
 
-# Python
+# Keep CSV summaries and metrics
+!results/**/*.csv
+!results/**/model_metrics_summary.csv
+
+# Keep analysis notebooks
+!*.ipynb
+!analyze_results.ipynb
+
+# Keep JSON config files
+!results/**/*.json
+
+# ============================================
+# PYTHON
+# ============================================
+
+# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
 .Python
+
+# Virtual environments
 env/
 venv/
+ENV/
+env.bak/
+venv.bak/
+.venv/
 
-# Jupyter
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+*.manifest
+*.spec
+
+# ============================================
+# JUPYTER NOTEBOOK
+# ============================================
+
 .ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# ============================================
+# IDE / EDITOR
+# ============================================
+
+# VSCode
+.vscode/
+*.code-workspace
+
+# PyCharm
+.idea/
+*.iml
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# ============================================
+# OS SPECIFIC
+# ============================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+
+# ============================================
+# TEMPORARY FILES
+# ============================================
+
+# Logs
+*.log
+logs/
+*.log.*
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Cache
+.cache/
+*.cache
+
+# ============================================
+# PROJECT SPECIFIC
+# ============================================
+
+# Tensorboard logs
+runs/
+tensorboard_logs/
+
+# Downloaded archives
+*.tar.gz
+*.zip
+*.rar
+*.7z
+
+# Local configuration
+.env
+.env.local
+config.local.yml
