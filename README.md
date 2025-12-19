@@ -4,7 +4,6 @@
 
 [![Python](https://img.shields.io/badge/Python-3.12-blue.svg)](https://www.python.org/)
 [![TensorFlow](https://img.shields.io/badge/TensorFlow-2.20.0-orange.svg)](https://www.tensorflow.org/)
-[![Accuracy](https://img.shields.io/badge/Accuracy-93.23%25-success.svg)](results/deep_learning/)
 
 ## 📊 Results at a Glance
 
@@ -281,22 +280,3 @@ This project was completed as part of a Deep Learning course assignment. The goa
 - [ ] Transfer learning from pre-trained models
 - [ ] Real-time sentiment prediction API
 - [ ] Multilingual sentiment analysis
-
-## 🤝 Acknowledgments
-
-- **Bodapati et al. (2019)** for the baseline methodology
-- **TensorFlow team** for the deep learning framework
-- **NVIDIA** for GPU acceleration technology
-- **Amazon** for providing the customer reviews dataset
-
-## 📄 License
-
-This project is for educational purposes as part of a Deep Learning course assignment.
-
----
-
-**Project Status**: ✅ Complete and ready for submission
-
-**Last Updated**: October 26, 2025
-
-**Contact**: For questions about this project, please refer to the course materials.
